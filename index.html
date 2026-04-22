@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurczak z grilla u Emila – Starachowice</title>
+    <meta name="description" content="Najlepszy kurczak z rożna w Starachowicach. Świeży, soczysty, chrupiący. Ocena 4,9/5 na Google. Dworcowa 2, tel. 532 540 415. Czynne do 17:00.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep:   #0D0803;
+            --bg:        #150E05;
+            --surface:   #1D1408;
+            --surface2:  #28190A;
+            --gold:      #F0A030;
+            --gold-lt:   #FFD080;
+            --amber:     #C86A10;
+            --cream:     #F5E8D0;
+            --muted:     #7A6044;
+            --text:      #EDE0C8;
+            --star:      #FFB800;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'EB Garamond', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 200;
+            padding: 1.25rem 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(13,8,3,0.92), transparent);
+            transition: background 0.4s, border-color 0.4s;
+            border-bottom: 1px solid transparent;
+        }
+        nav.scrolled {
+            background: rgba(13, 8, 3, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom-color: rgba(240,160,48,0.18);
+        }
+        .nav-logo {
+            font-family: 'Abril Fatface', serif;
+            font-size: 1.45rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.01em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0.75;
+            transition: opacity 0.2s, color 0.2s;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--gold); }
+        .nav-cta {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            background: var(--gold);
+            color: var(--bg-deep);
+            padding: 0.6rem 1.5rem;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover {
+            background: var(--gold-lt);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(240,160,48,0.35);
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 55% at 50% 90%, rgba(210,100,10,0.42) 0%, transparent 68%),
+                radial-gradient(ellipse 50% 40% at 25% 70%, rgba(160,55,5,0.22) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 75% 70%, rgba(180,75,5,0.18) 0%, transparent 60%),
+                var(--bg-deep);
+        }
+        #ember-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            max-width: 900px;
+        }
+        .hero-eyebrow {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.6rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s ease both;
+            padding-top: 4rem;
+        }
+        @media (max-width: 900px) {
+            .hero-eyebrow { padding-top: 5rem; font-size: 0.55rem; letter-spacing: 0.15em; }
+        }
+        .hero-title-top {
+            font-family: 'Abril Fatface', serif;
+            font-size: clamp(3rem, 9.5vw, 8.5rem);
+            color: var(--cream);
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s ease both;
+        }
+        .hero-title-name {
+            display: block;
+            font-family: 'Abril Fatface', serif;
+            font-size: clamp(3.8rem, 12vw, 11rem);
+            color: var(--gold);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 80px rgba(240,160,48,0.4), 0 0 160px rgba(200,100,10,0.3);
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s ease both, goldGlow 3s 1.4s ease-in-out infinite alternate;
+        }
+        @keyframes goldGlow {
+            from { text-shadow: 0 0 60px rgba(240,160,48,0.3), 0 0 120px rgba(200,100,10,0.2); }
+            to   { text-shadow: 0 0 100px rgba(240,160,48,0.65), 0 0 200px rgba(200,100,10,0.45); }
+        }
+        .hero-tagline {
+            font-style: italic;
+            font-size: clamp(1.1rem, 3vw, 1.7rem);
+            color: var(--cream);
+            margin-top: 1.5rem;
+            letter-spacing: 0.08em;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s ease both;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+            background: rgba(240,160,48,0.1);
+            border: 1px solid rgba(240,160,48,0.32);
+            padding: 0.75rem 1.8rem;
+            border-radius: 60px;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            animation: fadeUp 0.8s 1.0s ease both;
+        }
+        .hero-badge .stars { color: var(--star); font-size: 1.05rem; letter-spacing: 0.12em; }
+        .hero-badge .score {
+            font-family: 'Abril Fatface', serif;
+            font-size: 1.15rem;
+            color: var(--gold);
+        }
+        .hero-badge .label {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.72rem;
+            color: var(--cream);
+            opacity: 0.85;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 1.2s ease both;
+        }
+        .btn-primary {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: var(--gold);
+            color: var(--bg-deep);
+            padding: 1rem 2.2rem;
+            border-radius: 2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            background: var(--gold-lt);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(240,160,48,0.35);
+        }
+        .btn-ghost {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid rgba(240,160,48,0.5);
+            color: var(--gold);
+            padding: 1rem 2.2rem;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-ghost:hover {
+            background: rgba(240,160,48,0.1);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 1.9s ease both;
+        }
+        .scroll-hint span {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .scroll-line {
+            width: 1px;
+            height: 42px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollDrop 1.6s ease-in-out infinite;
+        }
+        @keyframes scrollDrop {
+            0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+            40%  { opacity: 1; }
+            100% { opacity: 0; transform: scaleY(1); transform-origin: top; }
+        }
+
+        /* ===== ORNAMENTAL DIVIDER ===== */
+        .ornament {
+            text-align: center;
+            padding: 0.5rem 0;
+            color: rgba(240,160,48,0.3);
+            font-size: 1.1rem;
+            letter-spacing: 1rem;
+            line-height: 1;
+            position: relative;
+        }
+        .ornament::before, .ornament::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(240,160,48,0.3));
+        }
+        .ornament::before { left: 0; }
+        .ornament::after  { right: 0; background: linear-gradient(to left, transparent, rgba(240,160,48,0.3)); }
+
+        /* ===== RATING STRIP ===== */
+        #rating {
+            background: var(--surface);
+            padding: 5rem 3.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(240,160,48,0.12);
+            border-bottom: 1px solid rgba(240,160,48,0.12);
+        }
+        .strip-eyebrow {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2.5rem;
+        }
+        .big-rating {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+        .big-rating .num {
+            font-family: 'Abril Fatface', serif;
+            font-size: clamp(5rem, 14vw, 9rem);
+            color: var(--gold);
+            line-height: 1;
+        }
+        .big-rating .sep {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            color: var(--muted);
+        }
+        .big-rating .max {
+            font-family: 'Abril Fatface', serif;
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            color: var(--muted);
+        }
+        .strip-stars {
+            display: block;
+            color: var(--star);
+            font-size: 2rem;
+            letter-spacing: 0.35em;
+            margin: 0.8rem 0 0.6rem;
+        }
+        .strip-sub {
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+        .quotes-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .q-card {
+            background: var(--surface2);
+            border: 1px solid rgba(240,160,48,0.1);
+            border-radius: 3px;
+            padding: 1.6rem;
+            text-align: left;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .q-card:hover {
+            border-color: rgba(240,160,48,0.3);
+            transform: translateY(-4px);
+        }
+        .q-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.65;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+        .q-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .q-author {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--amber);
+        }
+        .q-stars {
+            color: var(--star);
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+        }
+
+        /* ===== MENU ===== */
+        #menu {
+            padding: 7rem 3.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.9rem;
+        }
+        .section-title {
+            font-family: 'Abril Fatface', serif;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            color: var(--cream);
+            line-height: 1.05;
+            margin-bottom: 1.2rem;
+        }
+        .section-desc {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: 4rem;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .menu-card {
+            background: var(--surface);
+            border: 1px solid rgba(240,160,48,0.14);
+            border-radius: 3px;
+            overflow: hidden;
+            transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 40px rgba(240,160,48,0.1);
+            border-color: rgba(240,160,48,0.38);
+        }
+        .menu-card-visual {
+            height: 190px;
+            background: var(--surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-card-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 100%, rgba(200,90,10,0.32), transparent 65%);
+        }
+        .menu-card-body {
+            padding: 2.2rem;
+        }
+        .menu-card-tag {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 0.6rem;
+        }
+        .menu-card-name {
+            font-family: 'Abril Fatface', serif;
+            font-size: 1.9rem;
+            color: var(--cream);
+            line-height: 1.15;
+            margin-bottom: 0.8rem;
+        }
+        .menu-card-desc {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 300;
+            font-style: normal;
+            color: var(--cream);
+            opacity: 0.85;
+            line-height: 1.7;
+            margin-bottom: 1.6rem;
+            letter-spacing: 0.02em;
+        }
+        .menu-card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.85) contrast(1.05);
+        }
+        .menu-card-price {
+            font-family: 'Abril Fatface', serif;
+            font-size: 1.55rem;
+            color: var(--gold);
+        }
+        .menu-card-price sub {
+            font-family: 'EB Garamond', serif;
+            font-size: 0.8rem;
+            color: var(--muted);
+            vertical-align: baseline;
+            margin-left: 0.25rem;
+        }
+        .price-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        #about {
+            background: var(--surface);
+            border-top: 1px solid rgba(240,160,48,0.1);
+            border-bottom: 1px solid rgba(240,160,48,0.1);
+            padding: 7rem 3.5rem;
+        }
+        .about-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7rem;
+            align-items: center;
+        }
+        .about-body {
+            font-size: 1.1rem;
+            line-height: 1.85;
+            color: var(--text);
+            margin-bottom: 1.4rem;
+        }
+        .about-sig {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: var(--gold);
+            margin-top: 2rem;
+        }
+        .usp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        .usp-item {
+            background: var(--surface2);
+            border: 1px solid rgba(240,160,48,0.1);
+            padding: 1.6rem;
+            border-radius: 3px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .usp-item:hover {
+            border-color: rgba(240,160,48,0.32);
+            transform: translateY(-3px);
+        }
+        .usp-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+        .usp-title {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cream);
+            margin-bottom: 0.4rem;
+        }
+        .usp-desc {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ===== CONTACT ===== */
+        #contact {
+            padding: 7rem 3.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+        .c-item {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            padding: 1.8rem 0;
+            border-bottom: 1px solid rgba(240,160,48,0.1);
+        }
+        .c-item:first-child { padding-top: 0; }
+        .c-icon { font-size: 1.6rem; flex-shrink: 0; width: 2.5rem; }
+        .c-label {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 0.4rem;
+        }
+        .c-value {
+            font-size: 1.2rem;
+            color: var(--cream);
+            line-height: 1.55;
+        }
+        .c-value a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .c-value a:hover { opacity: 0.75; }
+        .c-value strong { color: var(--gold-lt); }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(240,160,48,0.08);
+            border: 1px solid rgba(240,160,48,0.25);
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            margin-top: 0.5rem;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulseDot 2s infinite;
+        }
+        .status-dot.closed { background: #e74c3c; animation: none; }
+        .status-text {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            color: var(--cream);
+        }
+        @keyframes pulseDot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
+            50%       { box-shadow: 0 0 0 5px rgba(76,175,80,0); }
+        }
+        .map-wrap {
+            border: 1px solid rgba(240,160,48,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            height: 400px;
+            position: relative;
+        }
+        .map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(0.85) sepia(0.6) brightness(0.72);
+        }
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            margin-top: 1rem;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .map-link:hover { opacity: 1; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-deep);
+            border-top: 1px solid rgba(240,160,48,0.15);
+            padding: 3rem 3.5rem;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-logo {
+            font-family: 'Abril Fatface', serif;
+            font-size: 1.6rem;
+            color: var(--gold);
+        }
+        .footer-mid {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+        }
+        .footer-mid strong { color: var(--star); font-style: normal; font-weight: 400; }
+        .footer-phone a {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.88rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+
+            #menu, #contact { padding: 4.5rem 1.5rem; }
+            #about { padding: 4.5rem 1.5rem; }
+            #rating { padding: 4rem 1.5rem; }
+
+            .menu-grid      { grid-template-columns: 1fr; }
+            .about-inner    { grid-template-columns: 1fr; gap: 3.5rem; }
+            .contact-grid   { grid-template-columns: 1fr; gap: 3rem; }
+            .quotes-row     { grid-template-columns: 1fr; }
+
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .usp-grid { grid-template-columns: 1fr; }
+            .hero-ctas { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">u Emila</a>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">O nas</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <a href="tel:532540415" class="nav-cta">📞 532 540 415</a>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <canvas id="ember-canvas" aria-hidden="true"></canvas>
+
+        <div class="hero-content">
+            <p class="hero-eyebrow">Starachowice · ul. Dworcowa 2</p>
+
+            <h1>
+                <span class="hero-title-top">Kurczak z grilla</span>
+                <span class="hero-title-name">u&nbsp;Emila</span>
+            </h1>
+
+            <p class="hero-tagline">Świeży &nbsp;·&nbsp; Soczysty &nbsp;·&nbsp; Chrupiący</p>
+
+            <div class="hero-badge">
+                <span class="stars">★★★★★</span>
+                <span class="score">4,9</span>
+                <span class="label">/ 5 &nbsp;·&nbsp; 253 opinie Google</span>
+            </div>
+
+            <div class="hero-ctas">
+                <a href="tel:532540415" class="btn-primary">📞 Zadzwoń: 532&nbsp;540&nbsp;415</a>
+                <a href="#menu" class="btn-ghost">Zobacz menu</a>
+            </div>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span>Odkryj</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ===== RATING STRIP ===== -->
+    <section id="rating">
+        <p class="strip-eyebrow reveal">Oceniają nas mieszkańcy Starachowic i okolic</p>
+
+        <div class="big-rating reveal">
+            <span class="num">4,9</span>
+            <span class="sep">/</span>
+            <span class="max">5</span>
+        </div>
+        <span class="strip-stars reveal">★★★★★</span>
+        <p class="strip-sub reveal">na podstawie 253 opinii w Google</p>
+
+        <div class="quotes-row">
+            <div class="q-card reveal">
+                <p class="q-text">„Najlepszy kurczak w mieście. Zawsze świeży, skórka chrupiąca, w środku soczyste mięso. Emil to złoty człowiek!"</p>
+                <div class="q-footer">
+                    <span class="q-author">— Opinia Google</span>
+                    <span class="q-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="q-card reveal">
+                <p class="q-text">„Chodzę tu od lat. Ceny przyzwoite, jakość zawsze na poziomie. Gorąco polecam każdemu kto jest w Starachowicach!"</p>
+                <div class="q-footer">
+                    <span class="q-author">— Opinia Google</span>
+                    <span class="q-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="q-card reveal">
+                <p class="q-text">„Pan Emil zawsze z uśmiechem. Kurczak wyśmienity, zapiekanki pyszne. To ukryty skarb Starachowic — trzeba spróbować!"</p>
+                <div class="q-footer">
+                    <span class="q-author">— Opinia Google</span>
+                    <span class="q-stars">★★★★★</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <!-- ===== MENU ===== -->
+    <section id="menu">
+        <p class="section-label reveal">Nasze specjalności</p>
+        <h2 class="section-title reveal">Co znajdziesz<br>na rożnie?</h2>
+        <p class="section-desc reveal">Proste jedzenie, zrobione z sercem — tak jak powinno być od zawsze.</p>
+
+        <div class="menu-grid">
+            <!-- Card 1 -->
+            <article class="menu-card reveal">
+                <div class="menu-card-visual" aria-hidden="true">
+                    <img src="https://scontent.fktw4-1.fna.fbcdn.net/v/t39.30808-6/484941191_1061819122642695_7103066642405059867_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=OKfgvgB50P8Q7kNvwEiSLuW&_nc_oc=Adqr5IaF0rIBrYHZgRnedNc03y9x--59i8ut-HljzwEsO7XjnPG3uz6i-WCcI1GgOEs&_nc_zt=23&_nc_ht=scontent.fktw4-1.fna&_nc_gid=twUUnxmzfps2t0HXXx9rYw&_nc_ss=7a3a8&oh=00_Af18mBI3_CJ1yayxUwaz9BveWRYTr9ASS7whzSLG9Ce3MA&oe=69EE62E3" alt="Kurczak z rożna">
+                </div>
+                <div class="menu-card-body">
+                    <p class="menu-card-tag">Popisowe danie</p>
+                    <h3 class="menu-card-name">Kurczak z rożna</h3>
+                    <p class="menu-card-desc">Powoli pieczony na prawdziwym rożnie, aż skórka staje się złocista i chrupiąca. W środku — soczyste, delikatne mięso z naturalnym aromatem dymu i przypraw. Żadnych skrótów, żadnego pośpiechu.</p>
+                    <p class="menu-card-price">cały 44 zł <sub>· pół 22 zł</sub></p>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="menu-card reveal">
+                <div class="menu-card-visual" aria-hidden="true">
+                    <img src="https://scontent.fktw1-1.fna.fbcdn.net/v/t39.30808-6/527567645_1170995558391717_7042939561324908226_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7b2446&_nc_ohc=SCJg6QDjt2AQ7kNvwGFG2SR&_nc_oc=Adp82CdpkqOINVtczzCPs_EBIiTWrD5cYbtmUtz83cBzNA6HivTJhsn67e7BmXIyuO0&_nc_zt=23&_nc_ht=scontent.fktw1-1.fna&_nc_gid=g5dHaT6kKCyXutazGPb9MQ&_nc_ss=7a3a8&oh=00_Af0hvEYpl_bN_445HsBj8LEfAmwC0I9pnUVZ0saPMmzS-g&oe=69EE54F3" alt="Zapiekanka">
+                </div>
+                <div class="menu-card-body">
+                    <p class="menu-card-tag">Klasyk ulicy</p>
+                    <h3 class="menu-card-name">Zapiekanki</h3>
+                    <p class="menu-card-desc">Chrupiąca bagietka, ciągnący ser i aromatyczne nadzienie — prawdziwa zapiekanka rodem z czasów, gdy jedzenie smakowało najlepiej. Gorąca, prosto z pieca, w każdej chwili dnia.</p>
+                    <p class="menu-card-price">od 15 zł <sub>· do 22 zł</sub></p>
+                </div>
+            </article>
+        </div>
+
+        <!-- Pełne menu -->
+        <div style="margin-top:3.5rem; max-width:780px; margin-left:auto; margin-right:auto;">
+            <p class="section-label reveal" style="margin-bottom:1.5rem">Pełne menu</p>
+            <table style="width:100%; border-collapse:collapse; font-size:1.05rem;">
+                <tbody>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Zestaw obiadowy <span style="color:var(--muted); font-style:italic; font-size:0.9rem">(pół kurczaka, frytki, sos)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">33 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Frytki 350g</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">10 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Ziemniaczki z przyprawami 350g</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">10 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Sos <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(ketchup, czosnkowy, duński, bbq, słodkie chilli, sriracha, amerykański)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">2 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka tradycyjna <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(farsz pieczarkowy, ser, szczypiorek, cebulka prażona)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">15 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka z szynką</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">16 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka z salami</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">16 zł</td>
+                    </tr>
+                    <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka mięsna <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(szarpany kurczak, salami, boczek)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">22 zł</td>
+                    </tr>
+                    <tr class="reveal">
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka firmowa <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(szarpany kurczak)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">20 zł</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="price-note reveal">Dowóz na terenie Starachowic &nbsp;·&nbsp; Płatność gotówką &nbsp;·&nbsp; Zamówienia pod nr <a href="tel:532540415" style="color:var(--gold);text-decoration:none">532&nbsp;540&nbsp;415</a></p>
+    </section>
+
+    <div class="ornament" aria-hidden="true">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about">
+        <div class="about-inner">
+            <div>
+                <p class="section-label reveal">Poznaj Emila</p>
+                <h2 class="section-title reveal">Tu nie ma<br>sieciówki</h2>
+                <p class="about-body reveal">Kurczak z grilla u Emila to nie korporacja, nie franczyza — to człowiek, który każdego ranka wstaje, żeby upiec dla Ciebie najlepszego kurczaka w Starachowicach.</p>
+                <p class="about-body reveal">Emil sam dba o każde zamówienie. Sam dobiera przyprawy i pilnuje ognia. I sam wita każdego klienta z uśmiechem — bo dla niego to nie tylko praca, to pasja.</p>
+                <p class="about-body reveal">Dlatego klienci wracają. Nie raz, nie dwa — latami.</p>
+                <p class="about-sig reveal">— Emil, właściciel i mistrz rożna</p>
+            </div>
+
+            <div class="usp-grid">
+                <div class="usp-item reveal">
+                    <span class="usp-icon">🔥</span>
+                    <p class="usp-title">Pieczony na ogniu</p>
+                    <p class="usp-desc">Prawdziwy rożen, prawdziwy ogień — żadnych skrótów ani nagrywek.</p>
+                </div>
+                <div class="usp-item reveal">
+                    <span class="usp-icon">🐔</span>
+                    <p class="usp-title">Zawsze świeży</p>
+                    <p class="usp-desc">Kurczak pieczony na bieżąco — nigdy odgrzewany.</p>
+                </div>
+                <div class="usp-item reveal">
+                    <span class="usp-icon">💛</span>
+                    <p class="usp-title">Z sercem</p>
+                    <p class="usp-desc">Każde zamówienie traktowane jak dla własnej rodziny.</p>
+                </div>
+                <div class="usp-item reveal">
+                    <span class="usp-icon">💰</span>
+                    <p class="usp-title">Przystępne ceny</p>
+                    <p class="usp-desc">Od 10 do 44 zł — wyśmienity smak bez przepłacania.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <p class="section-label reveal">Znajdź nas</p>
+        <h2 class="section-title reveal">Przyjdź<br>i spróbuj</h2>
+
+        <div class="contact-grid">
+            <div>
+                <div class="c-item reveal">
+                    <span class="c-icon">📍</span>
+                    <div>
+                        <p class="c-label">Adres</p>
+                        <p class="c-value">ul. Dworcowa 2<br>27-200 Starachowice</p>
+                    </div>
+                </div>
+                <div class="c-item reveal">
+                    <span class="c-icon">📞</span>
+                    <div>
+                        <p class="c-label">Telefon</p>
+                        <p class="c-value"><a href="tel:532540415">532 540 415</a></p>
+                    </div>
+                </div>
+                <div class="c-item reveal">
+                    <span class="c-icon">🕐</span>
+                    <div>
+                        <p class="c-label">Godziny otwarcia</p>
+                        <p class="c-value">Czynne do <strong>17:00</strong></p>
+                        <div class="status-badge" id="status-badge">
+                            <div class="status-dot" id="status-dot"></div>
+                            <span class="status-text" id="status-text">Sprawdzam status…</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-item reveal">
+                    <span class="c-icon">⭐</span>
+                    <div>
+                        <p class="c-label">Ocena w Google</p>
+                        <p class="c-value">4,9 / 5 &nbsp;·&nbsp; 253 opinie</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <div class="map-wrap">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Dworcowa+2,+27-200+Starachowice&hl=pl&z=16&output=embed"
+                        title="Mapa — Kurczak z grilla u Emila"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Dworcowa+2,+27-200+Starachowice" class="map-link" target="_blank" rel="noopener">
+                    ↗ Wyznacz trasę w Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">u Emila</div>
+            <p class="footer-mid">
+                Kurczak z grilla · Dworcowa 2, Starachowice<br>
+                <strong>★★★★★</strong> 4,9 / 5 · 253 opinie Google
+            </p>
+            <div class="footer-phone">
+                <a href="tel:532540415">532 540 415</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // --- Navbar scroll effect ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+
+        // --- Reveal on scroll ---
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    const siblings = [...entry.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+                    const delay = siblings.indexOf(entry.target) * 90;
+                    setTimeout(() => entry.target.classList.add('visible'), Math.min(delay, 350));
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // --- Open / Closed status ---
+        (function() {
+            const now   = new Date();
+            const hours = now.getHours();
+            const mins  = now.getMinutes();
+            const total = hours * 60 + mins;
+            const open  = total < 17 * 60;
+
+            const dot  = document.getElementById('status-dot');
+            const text = document.getElementById('status-text');
+            if (open) {
+                text.textContent = 'Teraz otwarte · zamykamy o 17:00';
+            } else {
+                dot.classList.add('closed');
+                text.textContent = 'Aktualnie zamknięte · otwieramy rano';
+            }
+        })();
+
+        // --- Ember particle system ---
+        (function() {
+            const canvas = document.getElementById('ember-canvas');
+            const ctx    = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width  = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+
+            const COUNT = 55;
+            const embers = [];
+
+            function Ember() { this.init(true); }
+            Ember.prototype.init = function(scatter) {
+                this.x   = Math.random() * canvas.width;
+                this.y   = scatter
+                    ? canvas.height * (0.4 + Math.random() * 0.6)
+                    : canvas.height + 10 + Math.random() * 60;
+                this.r   = Math.random() * 2.6 + 0.6;
+                this.vy  = -(Math.random() * 1.4 + 0.5);
+                this.vx  = (Math.random() - 0.5) * 0.65;
+                this.age = 0;
+                this.life = Math.random() * 180 + 130;
+                this.hue = 20 + Math.random() * 28;
+            };
+            Ember.prototype.update = function() {
+                this.vx += Math.sin(this.age * 0.04) * 0.025;
+                this.x  += this.vx;
+                this.y  += this.vy;
+                this.age++;
+                if (this.age > this.life || this.y < -20) this.init(false);
+            };
+            Ember.prototype.draw = function() {
+                const alpha = Math.sin((this.age / this.life) * Math.PI) * 0.75;
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.shadowBlur  = 8;
+                ctx.shadowColor = `hsl(${this.hue}, 100%, 65%)`;
+                ctx.fillStyle   = `hsl(${this.hue}, 100%, 68%)`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            };
+
+            for (let i = 0; i < COUNT; i++) embers.push(new Ember());
+
+            // Only animate when hero is in view
+            const hero = document.getElementById('hero');
+            let running = true;
+            const heroObs = new IntersectionObserver(([e]) => {
+                running = e.isIntersecting;
+                if (running) loop();
+            }, { threshold: 0 });
+            heroObs.observe(hero);
+
+            function loop() {
+                if (!running) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                embers.forEach(e => { e.update(); e.draw(); });
+                requestAnimationFrame(loop);
+            }
+            loop();
+        })();
+    </script>
+</body>
+</html>
