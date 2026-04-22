@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0039)file:///C:/Users/X/Downloads/index.html -->
+<html lang="pl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurczak z grilla u Emila – Starachowice</title>
     <meta name="description" content="Najlepszy kurczak z rożna w Starachowicach. Świeży, soczysty, chrupiący. Ocena 4,9/5 na Google. Dworcowa 2, tel. 532 540 415. Czynne do 17:00.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index_files/css2" rel="stylesheet">
 
     <style>
         :root {
@@ -452,7 +452,7 @@
             border-color: rgba(240,160,48,0.38);
         }
         .menu-card-visual {
-            height: 190px;
+            height: 280px;
             background: var(--surface2);
             display: flex;
             align-items: center;
@@ -465,7 +465,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 15%;
             display: block;
+        }
+        .menu-card-visual img.img-chicken {
+            object-position: center 5%;
         }
         .menu-card-visual::after {
             content: '';
@@ -501,13 +505,6 @@
             line-height: 1.7;
             margin-bottom: 1.6rem;
             letter-spacing: 0.02em;
-        }
-        .menu-card-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: brightness(0.85) contrast(1.05);
         }
         .menu-card-price {
             font-family: 'Abril Fatface', serif;
@@ -764,12 +761,12 @@
 <body>
 
     <!-- ===== NAVIGATION ===== -->
-    <nav id="navbar">
-        <a href="#" class="nav-logo">u Emila</a>
+    <nav id="navbar" class="scrolled">
+        <a href="file:///C:/Users/X/Downloads/index.html#" class="nav-logo">u Emila</a>
         <ul class="nav-links">
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#about">O nas</a></li>
-            <li><a href="#contact">Kontakt</a></li>
+            <li><a href="file:///C:/Users/X/Downloads/index.html#menu">Menu</a></li>
+            <li><a href="file:///C:/Users/X/Downloads/index.html#about">O nas</a></li>
+            <li><a href="file:///C:/Users/X/Downloads/index.html#contact">Kontakt</a></li>
         </ul>
         <a href="tel:532540415" class="nav-cta">📞 532 540 415</a>
     </nav>
@@ -777,7 +774,7 @@
     <!-- ===== HERO ===== -->
     <section id="hero">
         <div class="hero-bg"></div>
-        <canvas id="ember-canvas" aria-hidden="true"></canvas>
+        <canvas id="ember-canvas" aria-hidden="true" width="417" height="679"></canvas>
 
         <div class="hero-content">
             <p class="hero-eyebrow">Starachowice · ul. Dworcowa 2</p>
@@ -797,7 +794,7 @@
 
             <div class="hero-ctas">
                 <a href="tel:532540415" class="btn-primary">📞 Zadzwoń: 532&nbsp;540&nbsp;415</a>
-                <a href="#menu" class="btn-ghost">Zobacz menu</a>
+                <a href="file:///C:/Users/X/Downloads/index.html#menu" class="btn-ghost">Zobacz menu</a>
             </div>
         </div>
 
@@ -809,32 +806,32 @@
 
     <!-- ===== RATING STRIP ===== -->
     <section id="rating">
-        <p class="strip-eyebrow reveal">Oceniają nas mieszkańcy Starachowic i okolic</p>
+        <p class="strip-eyebrow reveal visible">Oceniają nas mieszkańcy Starachowic i okolic</p>
 
-        <div class="big-rating reveal">
+        <div class="big-rating reveal visible">
             <span class="num">4,9</span>
             <span class="sep">/</span>
             <span class="max">5</span>
         </div>
-        <span class="strip-stars reveal">★★★★★</span>
-        <p class="strip-sub reveal">na podstawie 253 opinii w Google</p>
+        <span class="strip-stars reveal visible">★★★★★</span>
+        <p class="strip-sub reveal visible">na podstawie 253 opinii w Google</p>
 
         <div class="quotes-row">
-            <div class="q-card reveal">
+            <div class="q-card reveal visible">
                 <p class="q-text">„Najlepszy kurczak w mieście. Zawsze świeży, skórka chrupiąca, w środku soczyste mięso. Emil to złoty człowiek!"</p>
                 <div class="q-footer">
                     <span class="q-author">— Opinia Google</span>
                     <span class="q-stars">★★★★★</span>
                 </div>
             </div>
-            <div class="q-card reveal">
+            <div class="q-card reveal visible">
                 <p class="q-text">„Chodzę tu od lat. Ceny przyzwoite, jakość zawsze na poziomie. Gorąco polecam każdemu kto jest w Starachowicach!"</p>
                 <div class="q-footer">
                     <span class="q-author">— Opinia Google</span>
                     <span class="q-stars">★★★★★</span>
                 </div>
             </div>
-            <div class="q-card reveal">
+            <div class="q-card reveal visible">
                 <p class="q-text">„Pan Emil zawsze z uśmiechem. Kurczak wyśmienity, zapiekanki pyszne. To ukryty skarb Starachowic — trzeba spróbować!"</p>
                 <div class="q-footer">
                     <span class="q-author">— Opinia Google</span>
@@ -848,15 +845,15 @@
 
     <!-- ===== MENU ===== -->
     <section id="menu">
-        <p class="section-label reveal">Nasze specjalności</p>
-        <h2 class="section-title reveal">Co znajdziesz<br>na rożnie?</h2>
-        <p class="section-desc reveal">Proste jedzenie, zrobione z sercem — tak jak powinno być od zawsze.</p>
+        <p class="section-label reveal visible">Nasze specjalności</p>
+        <h2 class="section-title reveal visible">Co znajdziesz<br>na rożnie?</h2>
+        <p class="section-desc reveal visible">Proste jedzenie, zrobione z sercem — tak jak powinno być od zawsze.</p>
 
         <div class="menu-grid">
             <!-- Card 1 -->
-            <article class="menu-card reveal">
+            <article class="menu-card reveal visible">
                 <div class="menu-card-visual" aria-hidden="true">
-                    <img src="https://scontent.fktw4-1.fna.fbcdn.net/v/t39.30808-6/484941191_1061819122642695_7103066642405059867_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=OKfgvgB50P8Q7kNvwEiSLuW&_nc_oc=Adqr5IaF0rIBrYHZgRnedNc03y9x--59i8ut-HljzwEsO7XjnPG3uz6i-WCcI1GgOEs&_nc_zt=23&_nc_ht=scontent.fktw4-1.fna&_nc_gid=twUUnxmzfps2t0HXXx9rYw&_nc_ss=7a3a8&oh=00_Af18mBI3_CJ1yayxUwaz9BveWRYTr9ASS7whzSLG9Ce3MA&oe=69EE62E3" alt="Kurczak z rożna">
+                    <img src="./index_files/472192932_1007349521422989_8158954789166564372_n.jpg" alt="Kurczak z rożna">
                 </div>
                 <div class="menu-card-body">
                     <p class="menu-card-tag">Popisowe danie</p>
@@ -867,9 +864,9 @@
             </article>
 
             <!-- Card 2 -->
-            <article class="menu-card reveal">
+            <article class="menu-card reveal visible">
                 <div class="menu-card-visual" aria-hidden="true">
-                    <img src="https://scontent.fktw1-1.fna.fbcdn.net/v/t39.30808-6/527567645_1170995558391717_7042939561324908226_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7b2446&_nc_ohc=SCJg6QDjt2AQ7kNvwGFG2SR&_nc_oc=Adp82CdpkqOINVtczzCPs_EBIiTWrD5cYbtmUtz83cBzNA6HivTJhsn67e7BmXIyuO0&_nc_zt=23&_nc_ht=scontent.fktw1-1.fna&_nc_gid=g5dHaT6kKCyXutazGPb9MQ&_nc_ss=7a3a8&oh=00_Af0hvEYpl_bN_445HsBj8LEfAmwC0I9pnUVZ0saPMmzS-g&oe=69EE54F3" alt="Zapiekanka">
+                    <img src="./index_files/481971704_1052497640241510_8296945402768148306_n.jpg" alt="Zapiekanka">
                 </div>
                 <div class="menu-card-body">
                     <p class="menu-card-tag">Klasyk ulicy</p>
@@ -882,44 +879,44 @@
 
         <!-- Pełne menu -->
         <div style="margin-top:3.5rem; max-width:780px; margin-left:auto; margin-right:auto;">
-            <p class="section-label reveal" style="margin-bottom:1.5rem">Pełne menu</p>
+            <p class="section-label reveal visible" style="margin-bottom:1.5rem">Pełne menu</p>
             <table style="width:100%; border-collapse:collapse; font-size:1.05rem;">
                 <tbody>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
                         <td style="padding:1rem 0; color:var(--cream)">Zestaw obiadowy <span style="color:var(--muted); font-style:italic; font-size:0.9rem">(pół kurczaka, frytki, sos)</span></td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">33 zł</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">33 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
                         <td style="padding:1rem 0; color:var(--cream)">Frytki 350g</td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">10 zł</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">10 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
                         <td style="padding:1rem 0; color:var(--cream)">Ziemniaczki z przyprawami 350g</td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">10 zł</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">10 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
-                        <td style="padding:1rem 0; color:var(--cream)">Sos <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(ketchup, czosnkowy, duński, bbq, słodkie chilli, sriracha, amerykański)</span></td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">2 zł</td>
+                        <td style="padding:1rem 0; color:var(--cream)">Sos <span style="color:var(--cream); opacity:0.6; font-family:&#39;Josefin Sans&#39;,sans-serif; font-size:0.78rem">(ketchup, czosnkowy, duński, bbq, słodkie chilli, sriracha, amerykański)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">2 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
-                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka tradycyjna <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(farsz pieczarkowy, ser, szczypiorek, cebulka prażona)</span></td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">15 zł</td>
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka tradycyjna <span style="color:var(--cream); opacity:0.6; font-family:&#39;Josefin Sans&#39;,sans-serif; font-size:0.78rem">(farsz pieczarkowy, ser, szczypiorek, cebulka prażona)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">15 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
                         <td style="padding:1rem 0; color:var(--cream)">Zapiekanka z szynką</td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">16 zł</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">16 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
                         <td style="padding:1rem 0; color:var(--cream)">Zapiekanka z salami</td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">16 zł</td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">16 zł</td>
                     </tr>
                     <tr class="reveal" style="border-bottom:1px solid rgba(240,160,48,0.1)">
-                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka mięsna <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(szarpany kurczak, salami, boczek)</span></td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">22 zł</td>
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka mięsna <span style="color:var(--cream); opacity:0.6; font-family:&#39;Josefin Sans&#39;,sans-serif; font-size:0.78rem">(szarpany kurczak, salami, boczek)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">22 zł</td>
                     </tr>
                     <tr class="reveal">
-                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka firmowa <span style="color:var(--cream); opacity:0.6; font-family:'Josefin Sans',sans-serif; font-size:0.78rem">(szarpany kurczak)</span></td>
-                        <td style="padding:1rem 0; text-align:right; font-family:'Abril Fatface',serif; color:var(--gold)">20 zł</td>
+                        <td style="padding:1rem 0; color:var(--cream)">Zapiekanka firmowa <span style="color:var(--cream); opacity:0.6; font-family:&#39;Josefin Sans&#39;,sans-serif; font-size:0.78rem">(szarpany kurczak)</span></td>
+                        <td style="padding:1rem 0; text-align:right; font-family:&#39;Abril Fatface&#39;,serif; color:var(--gold)">20 zł</td>
                     </tr>
                 </tbody>
             </table>
@@ -995,7 +992,7 @@
                         <p class="c-value">Czynne do <strong>17:00</strong></p>
                         <div class="status-badge" id="status-badge">
                             <div class="status-dot" id="status-dot"></div>
-                            <span class="status-text" id="status-text">Sprawdzam status…</span>
+                            <span class="status-text" id="status-text">Teraz otwarte · zamykamy o 17:00</span>
                         </div>
                     </div>
                 </div>
@@ -1010,15 +1007,10 @@
 
             <div class="reveal">
                 <div class="map-wrap">
-                    <iframe
-                        src="https://maps.google.com/maps?q=Dworcowa+2,+27-200+Starachowice&hl=pl&z=16&output=embed"
-                        title="Mapa — Kurczak z grilla u Emila"
-                        loading="lazy"
-                        allowfullscreen
-                        referrerpolicy="no-referrer-when-downgrade">
+                    <iframe src="./index_files/maps.html" title="Mapa — Kurczak z grilla u Emila" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Dworcowa+2,+27-200+Starachowice" class="map-link" target="_blank" rel="noopener">
+                <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Dworcowa+2,+27-200+Starachowice" class="map-link" target="_blank" rel="noopener">
                     ↗ Wyznacz trasę w Google Maps
                 </a>
             </div>
@@ -1147,5 +1139,6 @@
             loop();
         })();
     </script>
-</body>
-</html>
+
+
+</body></html>
